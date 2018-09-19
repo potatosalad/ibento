@@ -44,7 +44,6 @@ defmodule Ibento.Web.MixProject do
       {:phoenix_html, "~> 2.11"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
-      {:ibento, in_umbrella: true},
       {:jason, "~> 1.0"},
       {:cowboy, "~> 2.4"},
       {:absinthe, "~> 1.4"},

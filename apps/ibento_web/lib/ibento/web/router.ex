@@ -13,6 +13,14 @@ defmodule Ibento.Web.Router do
     plug :accepts, ["json"]
   end
 
+  scope("/core") do
+    forward("/", Ibento.GraphQL.Core.Router)
+  end
+
+  scope("/edge") do
+    forward("/", Ibento.GraphQL.Edge.Router)
+  end
+
   scope "/", Ibento.Web do
     # Use the default browser stack
     pipe_through :browser
