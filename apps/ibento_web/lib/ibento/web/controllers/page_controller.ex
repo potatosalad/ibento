@@ -1,5 +1,5 @@
-defmodule IbentoWeb.PageController do
-  use IbentoWeb, :controller
+defmodule Ibento.Web.PageController do
+  use Ibento.Web, :controller
 
   def index(conn, _params) do
     render(conn, "index.html")

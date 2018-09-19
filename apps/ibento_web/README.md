@@ -1,4 +1,4 @@
-# IbentoWeb
+# Ibento.Web
 
 To start your Phoenix server:
 

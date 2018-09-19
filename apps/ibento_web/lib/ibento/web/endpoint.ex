@@ -1,7 +1,7 @@
-defmodule IbentoWeb.Endpoint do
+defmodule Ibento.Web.Endpoint do
   use Phoenix.Endpoint, otp_app: :ibento_web
 
-  socket "/socket", IbentoWeb.UserSocket,
+  socket "/socket", Ibento.Web.UserSocket,
     websocket: true,
     longpoll: false
 
@@ -38,5 +38,5 @@ defmodule IbentoWeb.Endpoint do
     key: "_ibento_web_key",
     signing_salt: "2ZOLIbza"
 
-  plug IbentoWeb.Router
+  plug Ibento.Web.Router
 end

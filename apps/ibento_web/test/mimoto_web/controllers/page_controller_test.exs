@@ -1,5 +1,5 @@
-defmodule IbentoWeb.PageControllerTest do
-  use IbentoWeb.ConnCase
+defmodule Ibento.Web.PageControllerTest do
+  use Ibento.Web.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get(conn, "/")

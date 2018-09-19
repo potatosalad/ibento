@@ -1,4 +1,4 @@
-defmodule IbentoWeb.ConnCase do
+defmodule Ibento.Web.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -19,10 +19,10 @@ defmodule IbentoWeb.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
-      alias IbentoWeb.Router.Helpers, as: Routes
+      alias Ibento.Web.Router.Helpers, as: Routes
 
       # The default endpoint for testing
-      @endpoint IbentoWeb.Endpoint
+      @endpoint Ibento.Web.Endpoint
     end
   end
 

@@ -1,5 +1,5 @@
-defmodule IbentoWeb.ErrorView do
-  use IbentoWeb, :view
+defmodule Ibento.Web.ErrorView do
+  use Ibento.Web, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

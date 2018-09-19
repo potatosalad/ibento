@@ -1,5 +1,5 @@
-defmodule IbentoWeb.Router do
-  use IbentoWeb, :router
+defmodule Ibento.Web.Router do
+  use Ibento.Web, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -13,7 +13,7 @@ defmodule IbentoWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/", IbentoWeb do
+  scope "/", Ibento.Web do
     # Use the default browser stack
     pipe_through :browser
 
@@ -21,7 +21,7 @@ defmodule IbentoWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", IbentoWeb do
+  # scope "/api", Ibento.Web do
   #   pipe_through :api
   # end
 end

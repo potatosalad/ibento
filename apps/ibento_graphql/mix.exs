@@ -1,19 +1,18 @@
-defmodule Ibento.Web.MixProject do
+defmodule Ibento.GraphQL.MixProject do
   use Mix.Project
 
   def project() do
     [
-      app: :ibento_web,
+      app: :ibento_graphql,
       version: "0.1.0",
       build_path: "../../_build",
       config_path: "../../config/config.exs",
       deps_path: "../../deps",
       lockfile: "../../mix.lock",
-      elixir: "~> 1.5",
+      elixir: "~> 1.7",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
+      compilers: [:phoenix] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
-      aliases: aliases(),
       deps: deps()
     ]
   end
@@ -23,7 +22,7 @@ defmodule Ibento.Web.MixProject do
   # Type `mix help compile.app` for more information.
   def application() do
     [
-      mod: {Ibento.Web.Application, []},
+      mod: {Ibento.GraphQL.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -37,29 +36,16 @@ defmodule Ibento.Web.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps() do
     [
-      {:ibento_graphql, in_umbrella: true},
-      {:phoenix, github: "phoenixframework/phoenix", ref: "b8a4a1f356728922dbbb14c397bc0160ba5efe5b", override: true},
-      {:phoenix_pubsub, "~> 1.1"},
-      {:phoenix_ecto, "~> 3.2"},
-      {:phoenix_html, "~> 2.11"},
-      {:phoenix_live_reload, "~> 1.0", only: :dev},
-      {:gettext, "~> 0.11"},
-      {:ibento, in_umbrella: true},
-      {:jason, "~> 1.0"},
-      {:cowboy, "~> 2.4"},
       {:absinthe, "~> 1.4"},
       {:absinthe_plug, "~> 1.4"},
       {:absinthe_relay, "~> 1.4"},
       {:absinthe_phoenix, github: "absinthe-graphql/absinthe_phoenix", branch: "master"},
-      {:apollo_tracing, "~> 0.4"}
-    ]
-  end
+      {:apollo_tracing, "~> 0.4"},
+      {:ojson, "~> 1.0"},
+      {:phoenix, github: "phoenixframework/phoenix", ref: "b8a4a1f356728922dbbb14c397bc0160ba5efe5b", override: true},
 
-  # Aliases are shortcuts or tasks specific to the current project.
-  # For example, we extend the test task to create and migrate the database.
-  #
-  # See the documentation for `Mix` for more info on aliases.
-  defp aliases do
-    [test: ["ecto.create --quiet", "ecto.migrate", "test"]]
+      # Umbrella
+      {:ibento, in_umbrella: true}
+    ]
   end
 end

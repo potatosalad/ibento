@@ -1,4 +1,4 @@
-defmodule IbentoWeb.ChannelCase do
+defmodule Ibento.Web.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -21,7 +21,7 @@ defmodule IbentoWeb.ChannelCase do
       use Phoenix.ChannelTest
 
       # The default endpoint for testing
-      @endpoint IbentoWeb.Endpoint
+      @endpoint Ibento.Web.Endpoint
     end
   end
 

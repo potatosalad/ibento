@@ -1,12 +1,12 @@
-defmodule IbentoWeb do
+defmodule Ibento.Web do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, views, channels and so on.
 
   This can be used in your application as:
 
-      use IbentoWeb, :controller
-      use IbentoWeb, :view
+      use Ibento.Web, :controller
+      use Ibento.Web, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -19,10 +19,10 @@ defmodule IbentoWeb do
 
   def controller do
     quote do
-      use Phoenix.Controller, namespace: IbentoWeb
+      use Phoenix.Controller, namespace: Ibento.Web
       import Plug.Conn
-      import IbentoWeb.Gettext
-      alias IbentoWeb.Router.Helpers, as: Routes
+      import Ibento.Web.Gettext
+      alias Ibento.Web.Router.Helpers, as: Routes
     end
   end
 
@@ -30,7 +30,7 @@ defmodule IbentoWeb do
     quote do
       use Phoenix.View,
         root: "lib/Ibento_web/templates",
-        namespace: IbentoWeb
+        namespace: Ibento.Web
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_flash: 1, get_flash: 2, view_module: 1]
@@ -38,9 +38,9 @@ defmodule IbentoWeb do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import IbentoWeb.ErrorHelpers
-      import IbentoWeb.Gettext
-      alias IbentoWeb.Router.Helpers, as: Routes
+      import Ibento.Web.ErrorHelpers
+      import Ibento.Web.Gettext
+      alias Ibento.Web.Router.Helpers, as: Routes
     end
   end
 
@@ -55,7 +55,7 @@ defmodule IbentoWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import IbentoWeb.Gettext
+      import Ibento.Web.Gettext
     end
   end
 

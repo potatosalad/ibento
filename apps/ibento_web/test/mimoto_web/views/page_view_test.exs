@@ -1,3 +1,3 @@
-defmodule IbentoWeb.PageViewTest do
-  use IbentoWeb.ConnCase, async: true
+defmodule Ibento.Web.PageViewTest do
+  use Ibento.Web.ConnCase, async: true
 end

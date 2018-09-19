@@ -1,3 +1,3 @@
-defmodule IbentoWeb.LayoutViewTest do
-  use IbentoWeb.ConnCase, async: true
+defmodule Ibento.Web.LayoutViewTest do
+  use Ibento.Web.ConnCase, async: true
 end
