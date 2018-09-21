@@ -34,7 +34,7 @@ defmodule Ibento.GraphQL.Core.Schema do
 
   def node_interface(type, _info) do
     case type do
-      %Ibento.Data.Event{} ->
+      %Ibento.Core.Data.Event{} ->
         :event
 
       _ ->

@@ -36,6 +36,7 @@ defmodule Ibento.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:timex, "~> 3.1"},
       {:postgrex, ">= 0.0.0"},
       {:ecto, "~> 2.2"}
     ]

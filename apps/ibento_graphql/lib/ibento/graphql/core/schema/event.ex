@@ -33,20 +33,20 @@ defmodule Ibento.GraphQL.Core.Schema.Event do
   end
 
   def fetch(_parent, %{type: :event, id: event_id}, _info) do
-    case Ibento.Repo.get(Ibento.Data.Event, event_id) do
+    case Ibento.Repo.get(Ibento.Core.Data.Event, event_id) do
       nil ->
         {:error, "not found"}
 
-      event = %Ibento.Data.Event{} ->
+      event = %Ibento.Core.Data.Event{} ->
         {:ok, event}
     end
   end
 
   def put(_parent, attrs, _info) do
-    changeset = Ibento.Data.Event.changeset(%Ibento.Data.Event{}, attrs)
+    changeset = Ibento.Core.Data.Event.changeset(%Ibento.Core.Data.Event{}, attrs)
 
     case Ibento.Repo.insert(changeset) do
-      {:ok, event = %Ibento.Data.Event{}} ->
+      {:ok, event = %Ibento.Core.Data.Event{}} ->
         output = %{
           event: event
         }

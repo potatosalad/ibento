@@ -6,4 +6,8 @@ defmodule Ibento.GraphQL.Edge.Schema.Types do
     field(:from, :string)
     field(:to, :string)
   end
+
+  object(:geofence_enter_event) do
+    ## TODO
+  end
 end

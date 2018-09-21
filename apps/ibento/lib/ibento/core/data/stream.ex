@@ -1,4 +1,4 @@
-defmodule Ibento.Data.Stream do
+defmodule Ibento.Core.Data.Stream do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -12,18 +12,21 @@ defmodule Ibento.Data.Stream do
   schema("streams") do
     field(:source, :string)
     field(:inserted_at, :utc_datetime, read_after_writes: true)
-    has_many(:stream_events, Ibento.Data.StreamEvent)
+    has_many(:stream_events, Ibento.Core.Data.StreamEvent)
     has_many(:events, through: [:stream_events, :event])
   end
 
-  def changeset(struct = %__MODULE__{}, attrs) do
-    struct
-    |> cast(attrs, [
-      :source
-    ])
-    |> validate_required([
-      :source
-    ])
+  @required_fields ~w(
+    source
+  )a
+
+  @allowed_fields @required_fields ++ ~w(
+  )a
+
+  def create_changeset(attrs) do
+    %__MODULE__{}
+    |> cast(attrs, @allowed_fields)
+    |> validate_required(@required_fields)
     |> unique_constraint(:source)
   end
 end

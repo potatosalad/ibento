@@ -1,4 +1,4 @@
-defmodule Ibento.Data.Event do
+defmodule Ibento.Core.Data.Event do
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -20,25 +20,26 @@ defmodule Ibento.Data.Event do
     field(:data, :map)
     field(:metadata, :map)
     field(:inserted_at, :utc_datetime, read_after_writes: true)
-    has_many(:stream_events, Ibento.Data.StreamEvent)
+    has_many(:stream_events, Ibento.Core.Data.StreamEvent)
     has_many(:streams, through: [:stream_events, :stream])
   end
 
-  def changeset(struct = %__MODULE__{}, attrs) do
-    struct
-    |> cast(attrs, [
-      :id,
-      :type,
-      :correlation,
-      :causation,
-      :data,
-      :metadata
-    ])
-    |> validate_required([
-      :id,
-      :type,
-      :data
-    ])
+  @required_fields~w(
+    id
+    type
+    data
+  )a
+
+  @allowed_fields @required_fields++~w(
+    correlation
+    causation
+    metadata
+  )a
+
+  def create_changeset(attrs) do
+    %__MODULE__{}
+    |> cast(attrs, @allowed_fields)
+    |> validate_required(@required_fields)
     |> unique_constraint(:id, name: :events_pkey)
   end
 end
