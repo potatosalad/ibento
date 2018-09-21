@@ -17,7 +17,6 @@ defmodule Ibento.GraphQL.Core.Schema.Event do
 
   object(:event_queries) do
     field(:events, list_of(:event)) do
-      arg(:event_id, :uuid)
       arg(:type, :string)
 
       resolve(&list_events/3)
@@ -41,6 +40,12 @@ defmodule Ibento.GraphQL.Core.Schema.Event do
 
       resolve(&Schema.Event.put/3)
     end
+  end
+
+  def list_events(_parent, %{type: type}, _info) do
+    Ecto.Query.from(e in Ibento.Core.Data.Event, where: e.type == ^type, select: e)
+    |> Ibento.Repo.all()
+    |> ok()
   end
 
   def list_events(_parent, _args, _info) do

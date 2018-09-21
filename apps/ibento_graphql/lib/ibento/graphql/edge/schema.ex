@@ -11,6 +11,8 @@ defmodule Ibento.GraphQL.Edge.Schema do
     node(field()) do
       resolve(&Schema.node_field/3)
     end
+
+    import_fields(:event_queries)
   end
 
   node(interface()) do
