@@ -12,6 +12,8 @@ defmodule Ibento.GraphQL.Core.Schema do
     node(field()) do
       resolve(&Schema.node_field/3)
     end
+
+    import_fields(:event_queries)
   end
 
   mutation do

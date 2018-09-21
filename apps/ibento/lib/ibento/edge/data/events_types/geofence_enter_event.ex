@@ -14,7 +14,8 @@ defmodule Ibento.Edge.Data.EventsTypes.GeofenceEnterEvent do
         geofence: geofence,
         zone: zone,
         vehicle: vehicle
-      }
+      },
+      metadata: %{}
     }
   end
 end

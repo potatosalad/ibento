@@ -2,41 +2,18 @@ defmodule Ibento.Core.Data.Events do
   @moduledoc """
   Events data model
   """
+  require Ecto.Query
 
-  @spec generate(Atom.t(), %Ibento.Core.Data.Event{}) :: {:ok, Ibento.Core.Data.Event.t()} | {:error, Ecto.Changeset.t()}
-  def generate(:geofence_enter, event) do
-    create_event(event)
+  @spec list(String.t()) :: [Ibento.Core.Data.Event.t()] | []
+  def list(graphql_query) do
+    Absinthe.run(graphql_query, Ibento.GraphQL.Core.Schema, variables: %{})
   end
 
-  def generate(:geofence_exit, event) do
-    create_event(event)
+  @spec generate(Atom.t(), String.t(), Map.t()) :: {:ok, Ibento.Core.Data.Event.t()} | {:error, Ecto.Changeset.t()}
+  def generate(:geofence_enter, mutation, variables) do
+    Absinthe.run(mutation, Ibento.GraphQL.Core.Schema, variables: variables)
   end
 
-  ## Helpers
-
-  defp create_event(event) do
-    {:ok, stream} = Ibento.Core.Data.Streams.get_or_create_stream(event.type)
-
-    event_attrs = %{
-      id: event.id,
-      type: event.type,
-      correlation: event.correlation,
-      causation: event.causation,
-      data: event.data,
-      metadata: event.metadata,
-      inserted_at: Timex.now()
-    }
-
-    {:ok, event} =
-      event_attrs
-      |> Ibento.Core.Data.Event.create_changeset()
-      |> Ibento.Repo.insert()
-
-
-    %{
-      event_id: event.id,
-      stream_id: stream.id
-    }
-    |> Ibento.Core.Data.StreamEvents.create_stream_event()
-  end
+  ## more generate functions for other events types
+  ## .......
 end

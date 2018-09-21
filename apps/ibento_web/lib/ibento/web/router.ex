@@ -27,7 +27,8 @@ defmodule Ibento.Web.Router do
 
     get "/", PageController, :index
 
-    get "/events", EventController, :index
+    get "/events", EventController, :list_events
+    get "/events/create", EventController, :create_event
   end
 
   # Other scopes may use custom stacks.

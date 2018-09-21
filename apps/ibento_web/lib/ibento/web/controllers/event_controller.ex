@@ -1,14 +1,13 @@
 defmodule Ibento.Web.EventController do
   use Ibento.Web, :controller
 
-  def index(conn, _params) do
-    my_data = %{
-      aghyad: "I need to make sure I can generate an event and persist it in Core's database.
-      This controller needs to dispatch a function from Edge, which in turn generates the event.
-      Edge then passes the generated and casted event to Core to be saved in the database."
-    }
+  def list_events(conn, _params) do
+    events = Ibento.Edge.Data.Events.list()
 
-    ## mimicing geberating an event
+    render(conn, "events.json", data: %{events: inspect(events)})
+  end
+
+  def create_event(conn, _params) do
     {:ok, event} = Ibento.Edge.SomeFeature.FeatureModule.feature_function_that_generates_geofence_enter_event()
 
     render(conn, "events.json", data: %{event: inspect(event)})
