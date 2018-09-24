@@ -17,7 +17,7 @@ defmodule Ibento.GraphQL.Core.Schema.Event do
 
   object(:event_queries) do
     field(:events, list_of(:event)) do
-      arg(:type, :string)
+      arg(:stream_source, :string)
 
       resolve(&list_events/3)
     end
@@ -25,7 +25,9 @@ defmodule Ibento.GraphQL.Core.Schema.Event do
 
   object(:event_mutations) do
     payload(field(:put_event)) do
+
       input do
+        field(:stream_source, :string)
         field(:id, non_null(:uuid))
         field(:type, non_null(:string))
         field(:correlation, :id)
@@ -42,16 +44,20 @@ defmodule Ibento.GraphQL.Core.Schema.Event do
     end
   end
 
-  def list_events(_parent, %{type: type}, _info) do
-    Ecto.Query.from(e in Ibento.Core.Data.Event, where: e.type == ^type, select: e)
+  def list_events(_parent, %{stream_source: stream_source}, _info) do
+    Ecto.Query.from(
+      e in Ibento.Core.Data.Event,
+      join: se in Ibento.Core.Data.StreamEvent, on: se.event_id == e.id,
+      join: s in Ibento.Core.Data.Stream, on: se.stream_id == s.id,
+      where: s.source == ^stream_source,
+      select: e
+    )
     |> Ibento.Repo.all()
     |> ok()
   end
 
   def list_events(_parent, _args, _info) do
-    Ecto.Query.from(e in Ibento.Core.Data.Event, select: e)
-    |> Ibento.Repo.all()
-    |> ok()
+    list_events(nil, %{stream_source: "all"}, nil)
   end
 
   def fetch(_parent, %{type: :event, id: event_id}, _info) do
@@ -65,11 +71,13 @@ defmodule Ibento.GraphQL.Core.Schema.Event do
   end
 
   def put(_parent, attrs, _info) do
+    source_stream = Map.get(attrs, :stream_source, "all")
+
     changeset = Ibento.Core.Data.Event.create_changeset(attrs)
 
     case Ibento.Repo.insert(changeset) do
       {:ok, event = %Ibento.Core.Data.Event{}} ->
-        {:ok, stream} = Ibento.Core.Data.Streams.get_or_create_stream(event.type)
+        {:ok, stream} = Ibento.Core.Data.Streams.get_or_create_stream(source_stream)
 
         %{
           event_id: event.id,

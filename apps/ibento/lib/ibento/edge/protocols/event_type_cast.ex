@@ -6,4 +6,7 @@ defprotocol Ibento.Edge.Protocols.EventTypeCast do
 
   @spec cast(any()) :: Ibento.Core.Data.Event.t()
   def cast(data)
+
+  @spec load(Ibento.Core.Data.Event.t()) :: any()
+  def load(data)
 end

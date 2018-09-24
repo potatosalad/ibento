@@ -18,4 +18,10 @@ defmodule Ibento.Edge.Data.EventsTypes.GeofenceEnterEvent do
       metadata: %{}
     }
   end
+
+  def load(%{id: id, data: data}) do
+    {:ok, data} = Poison.encode(%{geofence: data["geofence"], zone: data["zone"], vehicle: data["vehicle"]})
+
+    %{id: id, data: data}
+  end
 end

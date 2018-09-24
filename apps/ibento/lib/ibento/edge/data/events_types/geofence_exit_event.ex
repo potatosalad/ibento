@@ -18,4 +18,13 @@ defmodule Ibento.Edge.Data.EventsTypes.GeofenceExitEvent do
       metadata: %{}
     }
   end
+
+  def load(%Ibento.Edge.Data.Event{id: id, data: %{geofence: geofence, zone: zone, vehicle: vehicle}}) do
+    %Ibento.Edge.Data.EventsTypes.GeofenceEnterEvent{
+      id: id,
+      geofence: geofence,
+      zone: zone,
+      vehicle: vehicle
+    }
+  end
 end
