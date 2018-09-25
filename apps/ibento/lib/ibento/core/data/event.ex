@@ -24,13 +24,13 @@ defmodule Ibento.Core.Data.Event do
     has_many(:streams, through: [:stream_events, :stream])
   end
 
-  @required_fields~w(
+  @required_fields ~w(
     id
     type
     data
   )a
 
-  @allowed_fields @required_fields++~w(
+  @allowed_fields @required_fields ++ ~w(
     correlation
     causation
     metadata

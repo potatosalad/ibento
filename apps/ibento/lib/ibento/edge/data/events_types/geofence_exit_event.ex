@@ -19,12 +19,9 @@ defmodule Ibento.Edge.Data.EventsTypes.GeofenceExitEvent do
     }
   end
 
-  def load(%Ibento.Edge.Data.Event{id: id, data: %{geofence: geofence, zone: zone, vehicle: vehicle}}) do
-    %Ibento.Edge.Data.EventsTypes.GeofenceEnterEvent{
-      id: id,
-      geofence: geofence,
-      zone: zone,
-      vehicle: vehicle
-    }
+  def load(%{id: id, data: data}) do
+    {:ok, data} = Poison.encode(%{geofence: data["geofence"], zone: data["zone"], vehicle: data["vehicle"]})
+
+    %{id: id, data: data}
   end
 end

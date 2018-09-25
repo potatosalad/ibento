@@ -1,5 +1,4 @@
 defmodule Ibento.Edge.Data.Events do
-
   ###
   # Mimics the action of querying event data from Core through Viking (edge app)
   ###
@@ -68,7 +67,7 @@ defmodule Ibento.Edge.Data.Events do
         "metadata" => geofence_enter_event.metadata |> Poison.encode!(),
         "causation" => geofence_enter_event.causation,
         "correlation" => geofence_enter_event.correlation,
-        "streamSource": stream_source
+        streamSource: stream_source
       }
     }
 
@@ -99,7 +98,7 @@ defmodule Ibento.Edge.Data.Events do
         "metadata" => geofence_exit_event.metadata |> Poison.encode!(),
         "causation" => geofence_exit_event.causation,
         "correlation" => geofence_exit_event.correlation,
-        "streamSource": stream_source
+        streamSource: stream_source
       }
     }
 
@@ -112,5 +111,4 @@ defmodule Ibento.Edge.Data.Events do
   end
 
   ## .....
-
 end

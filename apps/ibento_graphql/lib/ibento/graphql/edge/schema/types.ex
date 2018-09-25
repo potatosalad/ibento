@@ -24,7 +24,7 @@ defmodule Ibento.GraphQL.Edge.Schema.Types do
     stream_source = Map.get(args, :stream_source, "all")
     {:ok, %{data: %{"events" => events}}} = Ibento.Edge.Data.Events.list(%{stream_source: stream_source})
 
-    Enum.map(events, &load_events/1) |> IO.inspect
+    Enum.map(events, &load_events/1)
     |> ok()
   end
 
@@ -33,18 +33,20 @@ defmodule Ibento.GraphQL.Edge.Schema.Types do
   defp load_events(event) do
     event = for {key, val} <- event, into: %{}, do: {String.to_atom(key), val}
 
-    data =  Map.get(event, :data, nil)
-    metadata =  Map.get(event, :metadata, nil)
+    data = Map.get(event, :data, nil)
+    metadata = Map.get(event, :metadata, nil)
 
-    data = case data do
-      nil -> %{}
-      data -> Poison.Parser.parse!(data)
-    end
+    data =
+      case data do
+        nil -> %{}
+        data -> Poison.Parser.parse!(data)
+      end
 
-    metadata = case metadata do
-      nil -> %{}
-      metadata -> Poison.Parser.parse!(metadata)
-    end
+    metadata =
+      case metadata do
+        nil -> %{}
+        metadata -> Poison.Parser.parse!(metadata)
+      end
 
     event = %{event | data: data, metadata: metadata}
 

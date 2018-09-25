@@ -10,6 +10,7 @@ defmodule Ibento.Core.Data.Streams do
     |> case do
       nil ->
         create_stream(%{source: source})
+
       stream ->
         {:ok, stream}
     end

@@ -1,5 +1,4 @@
 defmodule Ibento.Edge.SomeFeature.FeatureModule do
-
   ## ....
 
   def feature_function_that_generates_event_of_stream_source(type, stream_source) do
@@ -36,5 +35,4 @@ defmodule Ibento.Edge.SomeFeature.FeatureModule do
   end
 
   ## ....
-
 end
